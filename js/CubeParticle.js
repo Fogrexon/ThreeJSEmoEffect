@@ -19,6 +19,10 @@ const light = new THREE.DirectionalLight(0xFFFFFF);
 light.position.set( 0, 1, 0 );
 
 scene.add(light);
+const Amblight = new THREE.AmbientLight(0x222277);
+Amblight.position.set( 0, 1, 0 );
+
+scene.add(Amblight);
 
 // const geometry = new THREE.SphereGeometry(5,32,32);
 // const material = new THREE.MeshStandardMaterial();
@@ -67,7 +71,7 @@ const start = Date.now();
 
 const render = ()=> {
     controls.update();
-    particle.uniforms.time.value = (Date.now() - start)/1000;
+    if(!!particle) particle.uniforms.time.value = (Date.now() - start)/1000;
     renderer.render(scene, camera);
     setTimeout(render, 1000/30);
 }

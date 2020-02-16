@@ -15,7 +15,7 @@ class CubeParticleGenerator
 
     generateGeometry(indexs, offsets)
     {
-        const original = new THREE.BoxBufferGeometry(0.3,0.3,0.3);
+        const original = new THREE.BoxBufferGeometry(1,1,1);
 
         this.geometry = new THREE.InstancedBufferGeometry();
 
@@ -33,12 +33,15 @@ class CubeParticleGenerator
         let cUni = {
             time: {
                 value: 0
+            },
+            size: {
+                value: [100,100]
             }
         }
         
         this.uniforms = THREE.UniformsUtils.merge([THREE.ShaderLib.standard.uniforms,cUni]);
         this.uniforms.diffuse.value = new THREE.Vector3(1.0,1.0,1.0);
-        this.uniforms.roughness.value = 0.1;
+        this.uniforms.roughness.value = 1.0;
         
         this.material = new THREE.ShaderMaterial({
             vertexShader: vert,

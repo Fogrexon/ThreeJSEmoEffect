@@ -1,6 +1,7 @@
 let CubeParticleShader = {
     vertex: `
 attribute vec3 offset;
+attribute float index;
 varying vec3 vViewPosition;
 uniform float time;
 
