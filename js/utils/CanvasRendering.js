@@ -6,6 +6,8 @@ class CanvasRendering
         this.height = height;
 
         this.canvas = document.createElement("canvas");
+        this.canvas.width = width;
+        this.canvas.height = height;
         this.context = this.canvas.getContext("2d");
 
         this.startTime = Date.now();
@@ -14,13 +16,15 @@ class CanvasRendering
             map: new THREE.Texture(this.canvas),
             transparent:true});
 
-        this.material.map.needsUpdate = true;
 
         this.mesh = new THREE.Sprite(this.material);
+
+        this.mesh.material.map.needsUpdate = true;
     }
 
     render()
     {
-        (this.rendering.bind(this))(Date.now() - this.start);
+        this.rendering(this.context, Date.now() - this.startTime);
+        this.mesh.material.map.needsUpdate = true;
     }
 }

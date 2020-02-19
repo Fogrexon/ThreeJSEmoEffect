@@ -38,22 +38,24 @@ class THREEjsInitialize
 	render()
 	{
 		this.controls.update();
-		this.rederer.render(this.scene, this.camera);
+		this.renderer.render(this.scene, this.camera);
 	}
 }
 
 const three = new THREEjsInitialize();
+three.scene.background = new THREE.Color(0xff5555);
 
 const sprite = new CanvasRendering(500,500);
 sprite.mesh.scale.set(50,50);
-sprite.rendering = (t)=>{
-	const ctx = this.context;
+sprite.rendering = (ctx, t)=>{
 	ctx.clearRect(0,0,500,500);
-	ctx.lineWidth = 5;
+	ctx.lineWidth = 2;
 	ctx.beginPath();
 	ctx.moveTo(250, 250);
-	ctx.lineTo(250 * Math.cos(t/1000), 250 * Math.sin(t/1000));
-	ctx.strokeColor = "#FFFFFF";
+	ctx.lineTo(250 * Math.cos(t/1000)+250, 250 * Math.sin(t/1000)+250);
+	ctx.lineTo(250 * Math.cos(t/1000+Math.PI/2)+250, 250 * Math.sin(t/1000+Math.PI/2)+250);
+	ctx.closePath();
+	ctx.strokeStyle = "#0000FF";
 	ctx.stroke();
 }
 
